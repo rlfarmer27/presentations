@@ -540,7 +540,7 @@ If the referral concern is reading fluency, measure reading fluency — with a r
 
 This principle cuts against both the discrepancy model (inferring academic problems from a cognitive gap) and PSW (inferring academic deficits from a cognitive profile). It redirects assessment toward the domain where the problem lives and the specific skills within that domain that bear on intervention.
 
-A useful prior question, before selecting any measure: *a test is not useful — a score may be useful. Useful for what? Useful for whom?* (Farmer, 2023). If you cannot answer those questions for a given score, the score probably does not belong in the battery.
+A useful prior question, before selecting any measure: *a test is not useful — a score may be useful. Useful for what? Useful for whom?*. If you cannot answer those questions for a given score, the score probably does not belong in the battery.
 :::
 
 ::: {.column width="42%"}

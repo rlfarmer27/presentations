@@ -111,7 +111,6 @@ More definitional consensus does not mean easier assessment. The columns above d
 Return to this slide at the end if time allows — students often read it differently after working through the content. The SLD column in particular should look more complicated after the identification methods discussion.
 :::
 
----
 
 # {.section-title}
 
@@ -336,13 +335,10 @@ Comorbid conditions in IDD are **common and commonly undertreated.** ASD, anxiet
 The AAIDD supports intensity model gives you a language for translating assessment into planning that the team can actually act on. Encourage students to read the AAIDD-12 manual, not just the diagnostic criteria chapter.
 :::
 
----
 
 # {.section-title}
 
 ::: section-title-content
-**Section 2**
-
 **Specific Learning Disability**
 
 SLD as umbrella · Measure x · Reading · Mathematics · Written Expression
@@ -430,9 +426,9 @@ Cognitive processing profile
 ::::
 
 ::: callout-warn
-**Black box warning (Farmer, 2023):** Profile analysis has long faced criticism for lack of accuracy and reliability. Its usefulness in classification and treatment decisions has been historically poor. The evidence base for PSW is not a matter of perspective — it has been directly tested and found wanting.
+**Black box warning** Profile analysis has long faced criticism for lack of accuracy and reliability. Its usefulness in classification and treatment decisions has been historically poor. The evidence base for PSW is not a matter of perspective; it has been directly tested and found wanting.
 
-*"This position is mostly backed by rhetoric in which assertions are backed by citations of other scholars making assertions backed by citations of still other scholars making assertions."* — Schneider & Kaufman (2017, p. 8)
+*"This position [PSW] is mostly backed by rhetoric in which assertions are backed by citations of other scholars making assertions backed by citations of still other scholars making assertions."* — Schneider & Kaufman (2017, p. 8)
 :::
 
 ::: callout
@@ -482,7 +478,7 @@ p3 <- ggplot(subtypes, aes(x = subtype, y = pct, fill = subtype)) +
   ) +
   theme_deck() +
   theme(legend.position = "none",
-        axis.text.x = element_text(size = 11, lineheight = 0.9))
+        axis.text.x = element_text(size = 8, lineheight = 0.9))
 
 # Panel 2: horizontal bar chart — long method labels fit cleanly
 cutoffs <- tibble(
@@ -691,7 +687,6 @@ This is especially important when evaluating English learners. Bilingual assessm
 The SLD/IDD exclusion sometimes surprises students. If someone qualifies for IDD, you cannot also identify them with SLD under IDEA, even if there is a processing profile. Make sure they understand why that boundary exists.
 :::
 
----
 
 # {.section-title}
 
@@ -839,7 +834,6 @@ Both sets of needs are real and require simultaneous attention in the interventi
 2e identification is one of the most practically challenging assessment tasks because standard approaches are built around the assumption that high ability and disability don't co-occur at elevated rates — but they do. Students with ADHD and giftedness, or ASD and giftedness, are not rare.
 :::
 
----
 
 # {.section-title}
 

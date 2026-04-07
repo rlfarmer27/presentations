@@ -1,0 +1,297 @@
+/* ── best_practices_assessment.css ─────────────────────────────
+   Companion stylesheet for best_practices_assessment.qmd
+   Navy / Gold / Cream palette · DM Sans / Lora / DM Mono
+   ─────────────────────────────────────────────────────────────── */
+
+@import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Lora:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500;600&display=swap');
+
+/* ── Root palette ── */
+:root {
+  --navy:    #1a2744;
+  --slate:   #2e4066;
+  --gold:    #c9a84c;
+  --gold-lt: #f0d98a;
+  --cream:   #faf8f3;
+  --muted:   #6b7a99;
+  --red:     #c0392b;
+  --green:   #1e7e4e;
+  --blue:    #1a5fa8;
+  --border:  #ddd8cc;
+  --warm-bg: #fdf9ef;
+}
+
+/* ── Base typography ── */
+.reveal {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 16px;
+  color: var(--navy);
+  background-color: var(--cream);
+}
+
+.reveal h1, .reveal h2, .reveal h3 {
+  font-family: 'Lora', serif;
+  color: var(--navy);
+  text-transform: none;
+  letter-spacing: -0.01em;
+  line-height: 1.25;
+}
+
+.reveal h2 {
+  font-size: 1.25em;
+  border-bottom: 2px solid var(--gold);
+  padding-bottom: 0.2em;
+  margin-bottom: 0.55em;
+}
+
+.reveal h3 {
+  font-size: 0.95em;
+  color: var(--slate);
+  font-style: italic;
+  font-weight: 400;
+  margin-top: 0;
+  margin-bottom: 0.4em;
+}
+
+.reveal p {
+  line-height: 1.55;
+  margin-bottom: 0.4em;
+}
+
+.reveal ul, .reveal ol {
+  margin-left: 1.2em;
+}
+
+.reveal li {
+  margin-bottom: 0.3em;
+  line-height: 1.5;
+}
+
+.reveal strong {
+  color: var(--navy);
+  font-weight: 600;
+}
+
+.reveal em {
+  color: var(--slate);
+  font-style: italic;
+}
+
+.reveal code {
+  font-family: 'DM Mono', monospace;
+  background: #eee9de;
+  padding: 0.1em 0.35em;
+  border-radius: 3px;
+  color: var(--slate);
+  font-size: 0.87em;
+}
+
+/* ── Section title slides ── */
+.section-title {
+  background-color: var(--navy) !important;
+}
+
+.section-title-content {
+  color: #c8d0e0;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 1.05em;
+  line-height: 1.7;
+  text-align: center;
+  padding-top: 80px;
+}
+
+.section-title-content strong {
+  display: block;
+  font-family: 'Lora', serif;
+  font-size: 1.6em;
+  color: var(--gold-lt);
+  margin-bottom: 0.3em;
+  letter-spacing: -0.02em;
+}
+
+/* ── Callout boxes ── */
+.callout {
+  border-left: 4px solid var(--gold);
+  background: var(--warm-bg);
+  padding: 0.5em 0.85em;
+  border-radius: 0 5px 5px 0;
+  font-size: 0.9em;
+  margin: 0.6em 0;
+  line-height: 1.5;
+  color: var(--navy);
+}
+
+.callout-warn {
+  border-left: 4px solid var(--red);
+  background: #fdf0ef;
+  padding: 0.5em 0.85em;
+  border-radius: 0 5px 5px 0;
+  font-size: 0.9em;
+  margin: 0.6em 0;
+  line-height: 1.5;
+  color: var(--navy);
+}
+
+/* ── Concept card ── */
+.concept-card {
+  background: #f0ede4;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 0.65em 0.9em;
+  font-size: 0.9em;
+  line-height: 1.5;
+  height: 100%;
+}
+
+.concept-card strong {
+  display: block;
+  font-family: 'Lora', serif;
+  font-size: 1.0em;
+  color: var(--navy);
+  margin-bottom: 0.35em;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 0.25em;
+}
+
+.concept-card.fragment,
+.callout.fragment,
+.prong-box.fragment,
+.method-box.fragment {
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+/* ── Prong boxes (IDD three-prong) ── */
+.prong-box {
+  background: var(--navy);
+  color: #dde4f0;
+  border-radius: 6px;
+  padding: 0.75em 0.9em;
+  font-size: 0.88em;
+  line-height: 1.5;
+  text-align: center;
+  height: 100%;
+}
+
+.prong-box strong {
+  display: block;
+  font-family: 'Lora', serif;
+  font-size: 1.1em;
+  color: var(--gold-lt);
+  margin-bottom: 0.35em;
+}
+
+.prong-box em {
+  color: #a0b0cc;
+  font-size: 0.9em;
+  display: block;
+  margin-top: 0.4em;
+  font-style: italic;
+}
+
+/* ── Method boxes (SLD three methods) ── */
+.method-box {
+  background: #f5f2ea;
+  border: 1px solid var(--border);
+  border-top: 3px solid var(--navy);
+  border-radius: 0 0 6px 6px;
+  padding: 0.65em 0.85em;
+  font-size: 0.85em;
+  line-height: 1.6;
+  height: 100%;
+}
+
+.method-box strong {
+  display: block;
+  font-family: 'Lora', serif;
+  color: var(--navy);
+  margin-bottom: 0.35em;
+  font-size: 1.0em;
+}
+
+/* ── Tables ── */
+.reveal table {
+  font-size: 0.84em;
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0.4em 0;
+}
+
+.reveal table th {
+  background: var(--navy);
+  color: white;
+  font-weight: 500;
+  padding: 0.4em 0.7em;
+  text-align: left;
+  font-size: 0.88em;
+  font-family: 'DM Sans', sans-serif;
+}
+
+.reveal table td {
+  padding: 0.35em 0.7em;
+  border-bottom: 1px solid var(--border);
+  vertical-align: top;
+  line-height: 1.4;
+}
+
+.reveal table tr:nth-child(even) td {
+  background: #f5f3ee;
+}
+
+/* ── Figure note ── */
+.fig-note {
+  font-size: 0.75em;
+  color: var(--muted);
+  margin-top: 0.25em;
+  line-height: 1.4;
+  font-style: italic;
+}
+
+/* ── Slide number ── */
+.reveal .slide-number {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.75em;
+  color: var(--muted);
+  background: transparent;
+}
+
+/* ── Progress bar ── */
+.reveal .progress span {
+  background: var(--gold);
+}
+
+/* ── Column layout tweaks ── */
+.reveal .columns {
+  display: flex;
+  gap: 1em;
+  align-items: flex-start;
+}
+
+/* ── Blockquote ── */
+.reveal blockquote {
+  border-left: 4px solid var(--gold);
+  padding-left: 0.8em;
+  color: var(--slate);
+  font-style: italic;
+  font-family: 'Lora', serif;
+  font-size: 0.95em;
+  margin: 0.5em 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+/* ── Links ── */
+.reveal a {
+  color: var(--blue);
+  text-decoration: underline;
+}
+
+/* ── Print / PDF overrides ── */
+@media print {
+  .reveal {
+    background: white !important;
+  }
+  .section-title {
+    background: var(--navy) !important;
+    -webkit-print-color-adjust: exact;
+  }
+}

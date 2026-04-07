@@ -1,0 +1,1042 @@
+---
+title: "Best Practices in Psychoeducational Assessment"
+subtitle: "IDD, SLD, and Giftedness"
+author: "PSYC 7304 / 8304 · University of Memphis"
+format:
+  revealjs:
+    theme: simple
+    fontsize: 16px
+    slide-number: c/t
+    progress: true
+    controls: true
+    transition: none
+    transition-speed: fast
+    margin: 0.06
+    width: 1100
+    height: 700
+    css: best_practices_assessment.css
+    self-contained: true
+execute:
+  echo: false
+  warning: false
+  message: false
+---
+
+```{r setup}
+library(tidyverse)
+library(knitr)
+library(kableExtra)
+library(scales)
+
+# ── Shared theme ─────────────────────────────────────────────────
+theme_deck <- function(base = 13) {
+  theme_minimal(base_size = base) +
+    theme(
+      panel.grid.minor   = element_blank(),
+      panel.grid.major.y = element_line(color = "#e8e4da", linewidth = 0.4),
+      panel.grid.major.x = element_blank(),
+      axis.text          = element_text(color = "#3a4060", size = base - 1),
+      axis.title         = element_text(color = "#1a2744", size = base - 1),
+      plot.title         = element_text(color = "#1a2744", size = base + 1,
+                                        face = "bold", family = "serif"),
+      plot.subtitle      = element_text(color = "#6b7a99", size = base - 1),
+      legend.position    = "right",
+      legend.text        = element_text(color = "#3a4060", size = base - 2),
+      legend.title       = element_text(color = "#1a2744", size = base - 1,
+                                        face = "bold"),
+      plot.background    = element_rect(fill = "transparent", color = NA),
+      panel.background   = element_rect(fill = "transparent", color = NA),
+      strip.text         = element_text(color = "#1a2744", face = "bold",
+                                        size = base - 1)
+    )
+}
+
+col_navy  <- "#1a2744"
+col_gold  <- "#c9a84c"
+col_slate <- "#2e4066"
+col_muted <- "#6b7a99"
+col_cream <- "#faf8f3"
+col_red   <- "#c0392b"
+col_green <- "#1e7e4e"
+col_blue  <- "#1a5fa8"
+```
+
+# {.section-title}
+
+::: section-title-content
+**Best Practices in Psychoeducational Assessment**
+
+Intellectual Developmental Disability · Specific Learning Disability · Giftedness
+:::
+
+---
+
+## Assessment as Intervention Planning
+
+Assessment in applied psychology is not an end in itself.
+
+
+**The central question is never just** "Does this person qualify?"
+
+It is: *What does this person need — and how will we know if it is working?*
+
+Every decision in an evaluation — which measures to administer, how to interpret discrepancies, what to emphasize in the report — should be traceable back to this question.
+
+Today's session covers three categories with overlapping constructs, distinct evidence bases, and very different levels of methodological consensus.
+
+::: notes
+Frame this up front so students don't slip into credentialing-machine thinking. The label is a means to access and planning, not the product of the evaluation.
+:::
+
+---
+
+## Three Categories, Three Levels of Consensus
+
+Before diving in: these three categories differ substantially in how settled the science is. Knowing *where* the debate is helps you read the literature critically and make defensible decisions in practice.
+
+|  | **IDD** | **SLD** | **Giftedness** |
+|---|---|---|---|
+| Definitional consensus | Strong | Moderate | Weak |
+| Identification method | Settled | Contested | Highly variable |
+| Federal mandate | IDEA | IDEA | None (state-level) |
+| Core measures | IQ + adaptive | Achievement ± cognitive | IQ ± achievement ± nominations |
+| Cognitive assessment utility | ✓ Diagnostic/classification | ✗ Diagnostic; ✓ characterization only | Ceiling-limited |
+| Treatment evidence base | Supports intensity | Strong (reading) | Moderate |
+
+::: callout
+More definitional consensus does not mean easier assessment. The columns above describe the *identification framework* — not the difficulty of doing a good evaluation. Each category carries its own validity threats, equity challenges, and judgment demands.
+:::
+
+::: notes
+Return to this slide at the end if time allows — students often read it differently after working through the content. The SLD column in particular should look more complicated after the identification methods discussion.
+:::
+
+---
+
+# {.section-title}
+
+::: section-title-content
+**Section 1**
+
+**Intellectual Developmental Disability**
+
+Criteria · Assessment · Intervention linkage
+:::
+
+---
+
+## IDD: The Three-Prong Framework
+
+The AAIDD framework has been stable for over 60 years. All three prongs are required:
+
+:::: {.columns}
+
+::: {.column width="32%"}
+::: prong-box
+**Prong 1**
+
+Significantly subaverage intellectual functioning
+
+*Operationalized: FSIQ ≈ ≤70 (±SEM)*
+:::
+:::
+
+::: {.column width="32%"}
+::: prong-box
+**Prong 2**
+
+Significant adaptive behavior deficits
+
+*Conceptual, social, and/or practical domains*
+:::
+:::
+
+::: {.column width="32%"}
+::: prong-box
+**Prong 3**
+
+Onset during the developmental period
+
+*Before age 18 in the U.S.*
+:::
+:::
+
+::::
+
+::: callout
+Adaptive behavior is a **co-equal criterion**, not corroborating context. An IQ score alone is insufficient for diagnosis under any current framework (DSM-5-TR, IDEA, AAIDD-12).
+:::
+
+::: notes
+Emphasize prong 2 strongly — students consistently underweight adaptive behavior in practice. The "IQ test + done" reflex is one of the most common assessment errors you'll see in interns.
+:::
+
+---
+
+## IDD Prevalence
+
+```{r idd-prevalence, fig.width=9, fig.height=4.6}
+# Prevalence data: U.S. estimates from AAIDD / CDC / Boyle et al. 2011
+# General IDD ~1%, mild ~0.85%, moderate ~0.1%, severe/profound ~0.05%
+# School-age slightly higher due to inclusion of borderline/educational classifications
+
+severity <- tibble(
+  level = factor(
+    c("Mild\n(IQ 55–70)", "Moderate\n(IQ 40–55)",
+      "Severe\n(IQ 25–40)", "Profound\n(IQ <25)"),
+    levels = c("Mild\n(IQ 55–70)", "Moderate\n(IQ 40–55)",
+               "Severe\n(IQ 25–40)", "Profound\n(IQ <25)")
+  ),
+  pct_idd = c(85, 10, 3.5, 1.5)
+)
+
+p1 <- ggplot(severity, aes(x = level, y = pct_idd, fill = level)) +
+  geom_col(width = 0.65, color = NA) +
+  geom_text(aes(label = paste0(pct_idd, "%")),
+            vjust = -0.5, size = 4.2, color = col_navy, fontface = "bold") +
+  scale_fill_manual(values = c(
+    "Mild\n(IQ 55–70)"     = col_navy,
+    "Moderate\n(IQ 40–55)" = col_slate,
+    "Severe\n(IQ 25–40)"   = col_muted,
+    "Profound\n(IQ <25)"   = "#b0b8cc"
+  )) +
+  scale_y_continuous(limits = c(0, 100), labels = label_percent(scale = 1)) +
+  labs(
+    title = "Distribution of IDD by Severity Level",
+    subtitle = "Among individuals with IDD (U.S. estimates)",
+    x = NULL, y = "% of IDD population"
+  ) +
+  theme_deck() +
+  theme(legend.position = "none",
+        axis.text.x = element_text(size = 11, lineheight = 0.9))
+
+# Use shorter labels for the group panel to avoid crowding
+age_prev <- tibble(
+  group = factor(
+    c("School-age\n(IDEA)", "Adults\n(gen. pop.)", "Males", "Females"),
+    levels = c("School-age\n(IDEA)", "Adults\n(gen. pop.)", "Males", "Females")
+  ),
+  rate = c(1.6, 1.0, 1.3, 0.7)
+)
+
+p2 <- ggplot(age_prev, aes(x = group, y = rate, fill = group)) +
+  geom_col(width = 0.6, color = NA) +
+  geom_text(aes(label = paste0(rate, "%")),
+            vjust = -0.5, size = 4.2, color = col_navy, fontface = "bold") +
+  scale_fill_manual(values = c(
+    "School-age\n(IDEA)"   = col_gold,
+    "Adults\n(gen. pop.)"  = "#b08830",
+    "Males"                = col_slate,
+    "Females"              = col_muted
+  )) +
+  scale_y_continuous(limits = c(0, 2.2), labels = label_percent(scale = 1)) +
+  labs(
+    title = "IDD Prevalence by Group",
+    subtitle = "Approximate U.S. population-level estimates",
+    x = NULL, y = "Prevalence (%)"
+  ) +
+  theme_deck() +
+  theme(legend.position = "none",
+        axis.text.x = element_text(size = 11, lineheight = 0.9))
+
+library(patchwork)
+p1 + p2 + plot_layout(widths = c(1.1, 1))
+```
+
+::: fig-note
+Sources: AAIDD (2020); Boyle et al. (2011); IDEA Part B data. Severity distribution approximated; mild IDD constitutes the large majority of identified cases.
+:::
+
+::: notes
+Mild IDD is ~85% of cases. This matters for assessment emphasis: the student a school psychologist sees is almost always mild, where the IQ is near the threshold and adaptive behavior data often determines eligibility. The "profound IDD" student they imagine from textbooks is statistically rare in most practice settings.
+:::
+
+---
+
+## IDD: Intellectual Assessment
+
+The core clinical question is **profile characterization**, not just threshold determination.
+
+- Administer a **multifactorial cognitive battery** (WISC-V, WJ-V COG, SB-5, KABC-II). Full-scale IQ is required; the profile tells you more.
+- Report confidence intervals. A score of 73 may not rule out IDD; a score of 68 may be insufficient without adaptive corroboration. **SEM is not a formality.**
+- When administration is compromised (behavioral, sensory, motor, language factors), document accommodations clearly. Nonstandardized = qualitative interpretation.
+
+::: callout-warn
+The "bright line" error: treating a cutoff of 70 as absolute when the test's SEM is typically ±4–5 points. This is a classification decision, not a continuous measurement decision. Clinical judgment must fill the space measurement error creates.
+:::
+
+::: notes
+The SEM point connects directly back to their psychometrics unit. This is a natural application of what they already know about reliability and score precision.
+:::
+
+---
+
+## IDD: Adaptive Behavior Assessment
+
+Adaptive behavior is assessed through **structured informant interview or rating scale**, not direct testing.
+
+| Domain | Examples |
+|---|---|
+| **Conceptual** | Literacy, numeracy, time/money concepts, self-direction |
+| **Social** | Interpersonal skills, social judgment, following rules |
+| **Practical** | Daily living, self-care, occupational, safety |
+
+Key instruments: Vineland Adaptive Behavior Scales-3, ABAS-3
+
+::: callout
+**Multi-informant, multi-setting data is required.** A parent rating describes home functioning. It does not describe school, community, or vocational contexts. Discrepancies across informants are clinically informative; they are not noise to be averaged away.
+:::
+
+::: notes
+Students often want to pick the "best" informant or average discrepant ratings. Push back on this directly: a caregiver who rates adaptive behavior much higher than a teacher is telling you something real about context-dependent functioning.
+:::
+
+---
+
+## IDD: Validity and Fairness
+
+Persistent, well-documented disproportionate representation of historically marginalized groups in IDD identification.
+
+- Language background and linguistic difference vs. disorder
+- Trauma history and its effects on cognitive test performance
+- Limited educational opportunity affecting academic prerequisites for test items
+- Tester-examinee relationship and rapport effects
+
+::: callout-warn
+These are not caveats to add defensively at the end of the report. They are **interpretive tools to integrate throughout** — beginning at referral, shaping measure selection, informing interpretation, and structuring recommendations.
+:::
+
+When standardization is compromised: document what changed, explain the likely direction of effect on scores, and shift toward qualitative and behavioral interpretation. Do not report standard scores as if they are fully normative.
+
+::: notes
+This is one of the places where the APA and NASP ethics codes have real practical implications for everyday practice decisions, not just gross misconduct cases.
+:::
+
+---
+
+## IDD: From Assessment to Intervention
+
+Severity classification (mild/moderate/severe/profound) has limited intervention utility on its own. The **supports intensity framework** is more directly actionable.
+
+> *What specific supports, at what intensity, across what domains, does this individual need to function effectively in their environment?*
+
+Assessment findings should map onto support planning:
+
+- Specific adaptive skill deficits → targeted skill instruction
+- Communication profile → AAC or language supports if indicated
+- Sensory/behavioral profile → environmental modifications
+- Comorbidities (ASD features, internalizing disorders, epilepsy) → coordinated care
+- Family and systems context → caregiver coaching, IEP team structure
+
+::: callout
+Comorbid conditions in IDD are **common and commonly undertreated.** ASD, anxiety, ADHD, and depression co-occur at elevated rates. They warrant explicit assessment — not incidental mention — and targeted recommendations.
+:::
+
+::: notes
+The AAIDD supports intensity model gives you a language for translating assessment into planning that the team can actually act on. Encourage students to read the AAIDD-12 manual, not just the diagnostic criteria chapter.
+:::
+
+---
+
+# {.section-title}
+
+::: section-title-content
+**Section 2**
+
+**Specific Learning Disability**
+
+SLD as umbrella · Measure x · Reading · Mathematics · Written Expression
+:::
+
+---
+
+## SLD: An Administrative Umbrella
+
+"SLD" is a **legal and administrative category**, not a unitary psychological construct.
+
+:::: {.columns}
+
+::: {.column width="55%"}
+Under IDEA, SLD covers persistent difficulty in:
+
+- Reading (decoding, fluency, comprehension)
+- Written expression (spelling, fluency, composition)
+- Mathematics (calculation, fluency, problem solving)
+
+These are **distinct disorders** with distinct developmental trajectories, distinct cognitive correlates, and distinct intervention literatures. Grouping them under one label is administratively convenient; it is not scientifically coherent.
+:::
+
+::: {.column width="42%"}
+::: callout-warn
+**The practical consequence:** treating SLD as a unified thing produces vague assessment and generic recommendations. "Reading support" is not a treatment plan. Neither is "math intervention."
+
+Assessment must start by asking: *which domain, and what specifically within it?*
+:::
+:::
+
+::::
+
+::: notes
+This reframe is important. Students will spend their careers working inside the SLD category, so they need to understand its legal origin and its scientific limitations simultaneously. The goal is not to reject the category but to not let it do cognitive work it can't support.
+:::
+
+---
+
+## SLD: Identification Methods
+
+IDEA (2004) permits three approaches. There is **no federal mandate for any single method.**
+
+:::: {.columns}
+
+::: {.column width="32%"}
+::: method-box
+**Ability-Achievement Discrepancy**
+
+IQ vs. achievement gap
+
+❌ IQ suppressed by the same deficits causing SLD
+❌ Wait-to-fail by design
+❌ No treatment utility
+✓ Administratively familiar
+:::
+:::
+
+::: {.column width="32%"}
+::: method-box
+**Response to Intervention**
+
+Failure to respond to evidence-based instruction
+
+✓ Conceptually sound
+✓ Ties identification to instructional response
+❌ Requires MTSS infrastructure most clinical psychologists do not have
+❌ Fidelity is frequently inadequate in practice
+:::
+:::
+
+::: {.column width="32%"}
+::: method-box
+**Patterns of Strengths & Weaknesses**
+
+Cognitive processing profile
+
+❌ Incremental validity over achievement data: not established
+❌ Low PPV at 1–2% base rate (Stuebing et al., 2012)
+❌ Does not reliably improve treatment planning
+✓ Theoretically motivated
+:::
+:::
+
+::::
+
+::: callout-warn
+**Black box warning (Farmer, 2023):** Profile analysis has long faced criticism for lack of accuracy and reliability. Its usefulness in classification and treatment decisions has been historically poor. The evidence base for PSW is not a matter of perspective — it has been directly tested and found wanting.
+
+*"This position is mostly backed by rhetoric in which assertions are backed by citations of other scholars making assertions backed by citations of still other scholars making assertions."* — Schneider & Kaufman (2017, p. 8)
+:::
+
+::: callout
+For clinical psychologists: **low achievement on well-normed measures, combined with systematic ruling out of exclusionary factors, is the most defensible approach.** RTI is conceptually superior but requires an infrastructure you will rarely have. PSW should not drive identification decisions.
+:::
+
+::: notes
+The Stuebing et al. (2012) finding is the empirical anchor — simulated 5,000 cases, evaluated C/DM, D/CM, and DD/C methods. Excellent NPV but very low PPV at a 1-2% base rate, poor overlap between methods. Low PPV is the practical killer: most positive identifications from PSW are false positives. The Schneider & Kaufman quote is from two people who were themselves former defenders of cognitive assessment in LD — the self-correction makes it more credible, not less.
+:::
+
+---
+
+## SLD Prevalence
+
+```{r sld-prevalence, fig.width=9, fig.height=4.6}
+# SLD prevalence data
+# Overall SLD: ~5-15% depending on definition; IDEA-identified ~5%
+# Reading disability most common at ~80% of SLD
+# Fletcher et al. estimate 5-17% for reading disability alone depending on cutoff
+
+# Panel 1: SLD subtypes as % of all SLD — vertical bars, labels short
+subtypes <- tibble(
+  subtype = factor(
+    c("Reading\nDisability", "Mathematics\nDisability",
+      "Written\nExpression", "Reading +\nMathematics"),
+    levels = c("Reading\nDisability", "Mathematics\nDisability",
+               "Written\nExpression", "Reading +\nMathematics")
+  ),
+  pct = c(80, 6, 4, 10)
+)
+
+p3 <- ggplot(subtypes, aes(x = subtype, y = pct, fill = subtype)) +
+  geom_col(width = 0.65, color = NA) +
+  geom_text(aes(label = paste0(pct, "%")),
+            vjust = -0.5, size = 4.2, color = col_navy, fontface = "bold") +
+  scale_fill_manual(values = c(
+    "Reading\nDisability"     = col_navy,
+    "Mathematics\nDisability" = col_slate,
+    "Written\nExpression"     = col_muted,
+    "Reading +\nMathematics"  = "#b0b8cc"
+  )) +
+  scale_y_continuous(limits = c(0, 98), labels = label_percent(scale = 1)) +
+  labs(
+    title = "SLD Subtypes Among Identified Students",
+    subtitle = "Approximate distribution (U.S. IDEA data)",
+    x = NULL, y = "% of SLD-identified"
+  ) +
+  theme_deck() +
+  theme(legend.position = "none",
+        axis.text.x = element_text(size = 11, lineheight = 0.9))
+
+# Panel 2: horizontal bar chart — long method labels fit cleanly
+cutoffs <- tibble(
+  method = factor(
+    c("RTI non-response", "Discrepancy method",
+      "Low achievement (≤16th %ile)", "Low achievement (≤25th %ile)",
+      "IDEA-identified (school)"),
+    levels = c("RTI non-response", "Discrepancy method",
+               "Low achievement (≤16th %ile)", "Low achievement (≤25th %ile)",
+               "IDEA-identified (school)")
+  ),
+  rate        = c(6.0, 4.5, 10.0, 17.0, 5.0),
+  method_type = c("practice", "practice", "research", "research", "practice")
+)
+
+p4 <- ggplot(cutoffs, aes(y = method, x = rate, fill = method_type)) +
+  geom_col(width = 0.65, color = NA) +
+  geom_text(aes(label = paste0(rate, "%")),
+            hjust = -0.2, size = 4.0, color = col_navy, fontface = "bold") +
+  scale_fill_manual(
+    values = c("practice" = col_gold, "research" = col_navy),
+    labels = c("practice" = "Practice-based", "research" = "Research-based"),
+    name   = NULL
+  ) +
+  scale_x_continuous(limits = c(0, 22), labels = label_percent(scale = 1)) +
+  labs(
+    title = "SLD Prevalence by Identification Method",
+    subtitle = "Reading disability focus; estimates vary by cutoff",
+    x = "Estimated prevalence (%)", y = NULL
+  ) +
+  theme_deck() +
+  theme(legend.position = "top",
+        legend.text     = element_text(size = 10),
+        axis.text.y     = element_text(size = 10))
+
+p3 + p4 + plot_layout(widths = c(0.9, 1.3))
+```
+
+::: fig-note
+Sources: Fletcher et al. (2019, 2024); IDEA Part B Child Count data; Shaywitz & Shaywitz (2020). Prevalence of reading disability varies by operationalization; IDEA-identified reflects eligibility decisions, not disorder prevalence.
+:::
+
+::: notes
+The gap between 5% IDEA-identified and 17% meeting low-achievement criteria is one of the most important empirical facts in the field. It reflects both over-reliance on restrictive definitions and inadequate referral practices. Use this to motivate why the identification debate matters practically.
+:::
+
+---
+
+## The "Measure X" Principle
+
+:::: {.columns}
+
+::: {.column width="55%"}
+::: concept-card
+**If you want to know about x, measure x.**
+
+If the referral concern is reading fluency, measure reading fluency — with a reading fluency measure. Do not measure processing speed and infer that fluency is probably affected. If the concern is math fact automaticity, assess math fact automaticity directly.
+:::
+
+This principle cuts against both the discrepancy model (inferring academic problems from a cognitive gap) and PSW (inferring academic deficits from a cognitive profile). It redirects assessment toward the domain where the problem lives and the specific skills within that domain that bear on intervention.
+
+A useful prior question, before selecting any measure: *a test is not useful — a score may be useful. Useful for what? Useful for whom?* (Farmer, 2023). If you cannot answer those questions for a given score, the score probably does not belong in the battery.
+:::
+
+::: {.column width="42%"}
+::: callout
+**The one principled exception: phonological awareness**
+
+The causal link from phonological processing to decoding is unusually direct, well-validated, and bidirectional. Phonological processing assessment adds information beyond decoding scores alone: it identifies the mechanism and points toward specific instructional targets.
+
+This exception proves the rule. It earns its place because the construct-to-skill connection is explicit, specific, and empirically established. Ask the same question of any other processing construct before including it.
+:::
+:::
+
+::::
+
+::: notes
+The "a test is not useful; a score may be useful — for what? for whom?" framing is from Farmer (2023) and is worth attributing explicitly in lecture. It's a clean conceptual move that forces students to think about utility before administration rather than after. The phonological awareness exception is worth dwelling on — students should understand *why* that construct earns its place, which gives them a framework for evaluating whether others do.
+:::
+
+---
+
+## Reading: Development and Assessment
+
+Reading is not one skill. Skilled reading requires distinct, developmentally sequenced components:
+
+:::: {.columns}
+
+::: {.column width="55%"}
+**What to assess — and why:**
+
+| Component | Measures | Why It Matters |
+|---|---|---|
+| Phonological awareness | CTOPP-2, PAST | Causal mechanism for decoding; treatment target |
+| Decoding | TOWRE-2, WJ-V Letter-Word | Real words + pseudowords separately |
+| Reading fluency | GORT-5, CBM-R probes | Speed + accuracy; often the residual problem |
+| Comprehension | WRMT-3, informal probes | Distinct from decoding; requires language |
+:::
+
+::: {.column width="42%"}
+::: callout
+A student who cannot decode needs phonics instruction. A student who decodes but reads slowly needs fluency intervention. A student who reads accurately and fluently but does not comprehend needs language and strategy work.
+
+**These are different problems. Measure each.**
+:::
+:::
+
+::::
+
+**Intervention anchor:** Structured literacy — explicit, systematic phonics — has the strongest evidence base in educational psychology for decoding-based reading disability.
+
+::: notes
+Emphasize that the simple view of reading (reading = decoding × language comprehension) is a useful frame here. You can have a decoding problem, a language comprehension problem, or both. Assessment should tell you which. The Hasbrouck & Tindal fluency norms are useful clinical benchmarks worth mentioning.
+:::
+
+---
+
+## Mathematics: Development and Assessment
+
+Mathematics disability is **less well understood** than reading disability but the intervention literature has a clear implication: **procedural fluency is the priority.**
+
+:::: {.columns}
+
+::: {.column width="55%"}
+**The fluency argument (VanDerHeyden, Poncy, colleagues):**
+
+- Basic fact automaticity is a prerequisite, not a byproduct, of mathematical competence
+- Working memory is heavily taxed by slow or effortful fact retrieval
+- Freeing working memory through automaticity allows conceptual instruction to land
+- Procedural fluency and conceptual understanding are **complements**, not competitors — but fluency comes first
+
+**What to assess:**
+
+- Computation fluency (timed): single-digit facts, multidigit operations
+- Math problem solving: applied, untimed
+- Number sense screening for younger children
+:::
+
+::: {.column width="42%"}
+::: callout
+**Measure x:** If the concern is that a student cannot retrieve math facts, time them on math facts. A broad math composite score from a normed battery tells you there is a problem; a timed probe tells you where it is and gives you a baseline for progress monitoring.
+:::
+:::
+
+::::
+
+::: notes
+VanDerHeyden's work on math CBM and fluency-based intervention is directly relevant here. The key point is that interventions targeting procedural fluency (e.g., Cover-Copy-Compare, explicit practice with feedback) have better evidence than constructivist math approaches for students with math disability. This is sometimes a politically charged point in education but the evidence is fairly clear.
+:::
+
+---
+
+## Written Expression: Development and Assessment
+
+Written expression is the **most poorly assessed** of the three SLD domains. Composite scores obscure more than they reveal.
+
+:::: {.columns}
+
+::: {.column width="55%"}
+**Writing has separable components — assess them separately:**
+
+| Component | What to Measure |
+|---|---|
+| Transcription/spelling | Spelling subtests; dictation tasks |
+| Writing fluency | Timed writing samples; words correct per minute |
+| Sentence construction | Syntax, grammar, mechanics |
+| Composition | Organization, ideation, text-level coherence |
+
+A student with poor spelling has a different problem than a student who spells adequately but produces nothing in a timed condition, who has a different problem than a student who writes fluently but produces incoherent text.
+:::
+
+::: {.column width="42%"}
+::: callout-warn
+**The composite score problem:** A written expression standard score averages across components that can dissociate. A student who scores at the 30th percentile overall might have average fluency and severely impaired mechanics, or the reverse. The composite tells you neither.
+
+Supplement normed batteries with timed writing samples and analyze them at the component level.
+:::
+:::
+
+::::
+
+::: notes
+The written expression literature is thinner than reading, and intervention evidence is weaker. Students should know this honestly. Self-Regulated Strategy Development (SRSD) has the best evidence for composition; explicit spelling instruction for transcription. The key assessment move is decomposition — resist the composite.
+:::
+
+---
+
+## SLD: Ruling Out Exclusionary Factors
+
+Exclusionary factors are **genuine alternative hypotheses**, not documentation checkboxes.
+
+| Factor | Why It Matters |
+|---|---|
+| Inadequate instruction | Low achievement ≠ disability; Tier 1 quality must be documented |
+| Limited English proficiency | Language difference vs. language/learning disorder |
+| Visual/hearing impairment | Sensory factors depress achievement independent of cognitive ability |
+| Intellectual disability | SLD and IDD are **mutually exclusive** under IDEA |
+| Emotional/behavioral disorder | Anxiety, trauma, and EBD produce achievement deficits |
+| Attendance / environmental factors | Chronic absenteeism, housing instability, food insecurity |
+
+::: callout-warn
+This is especially important when evaluating English learners. Bilingual assessment, processing data across languages, and careful history-taking are required — not optional accommodations.
+:::
+
+::: notes
+The SLD/IDD exclusion sometimes surprises students. If someone qualifies for IDD, you cannot also identify them with SLD under IDEA, even if there is a processing profile. Make sure they understand why that boundary exists.
+:::
+
+---
+
+# {.section-title}
+
+::: section-title-content
+**Section 3**
+
+**Giftedness**
+
+Conceptual variability · Identification practices · Equity · Twice-exceptional students
+:::
+
+---
+
+## Giftedness: Definitional Context
+
+Unlike IDD and SLD, giftedness has **no federal mandate and no settled identification methodology.**
+
+::: callout
+Criteria are set at the **state and district level** and vary enormously. Knowing what applies in your setting is a professional responsibility, not a preference.
+:::
+
+The federal definition (ESEA) recognizes multiple domains:
+
+- General intellectual ability
+- Specific academic aptitude
+- Creative/productive thinking
+- Leadership ability
+- Visual and performing arts
+
+**In practice**: Most identification systems privilege general cognitive ability and academic achievement. Students with strengths in creativity, leadership, or domain-specific non-academic areas are systematically underidentified.
+
+::: notes
+The variability here is real and consequential. A student who qualifies as gifted in one district may not qualify in the district two miles away. Students heading into practice need to know this is the landscape.
+:::
+
+---
+
+## Giftedness: Cognitive Assessment Considerations
+
+Standard cognitive batteries were normed to reliably differentiate within roughly ±2 SD of the mean. At the upper extreme, they run out of difficult items.
+
+:::: {.columns}
+
+::: {.column width="55%"}
+**Ceiling effects** are a real validity threat:
+
+- A student scoring at the 99th percentile on a standard battery may be performing substantially higher
+- Standard norms cannot resolve performance above ~99th percentile with precision
+- **Extended-norm instruments** are better suited for high-ability identification:
+  - WISC-V Extended Norms (Raiford et al.)
+  - Stanford-Binet 5 (Extended Norms Edition)
+  - Reynolds Intellectual Assessment Scales-2
+:::
+
+::: {.column width="42%"}
+::: callout
+The same ceiling problem applies to **achievement tests.** Grade-level tests measure mastery of grade-level content; they cannot document exceptional ability. Above-level testing (e.g., administering tests normed for older students) is the appropriate solution.
+:::
+:::
+
+::::
+
+::: notes
+The ceiling effect is probably the most practically important psychometric point in gifted assessment. Students who score at the 99th percentile are often under-identified or their level of giftedness is underestimated because the test simply can't measure that high.
+:::
+
+---
+
+## Giftedness: Multi-Method Identification
+
+::: callout
+NAGC and research consensus: **no single measure is sufficient.** Multiple-method identification is the standard.
+:::
+
+| Method | Strengths | Limitations |
+|---|---|---|
+| Cognitive ability tests | Objective, reliable, g-loaded | Ceiling effects; language/cultural demands |
+| Achievement tests | Direct academic evidence | Grade-level ceiling; doesn't assess all talent domains |
+| Teacher nominations | Contextual knowledge; broad domains | Implicit bias; favor "compliant gifted" prototype |
+| Parent nominations | Behavioral history; home context | Social desirability; limited normative calibration |
+| Rating scales (e.g., GRS-2) | Structured, normed behavioral indicators | Still dependent on rater knowledge and bias |
+| Portfolios / performance | Domain-specific evidence; creativity | Subjectivity; variable quality standards |
+
+::: notes
+Teacher nominations are notoriously biased — teachers are more likely to nominate students who are quiet, compliant, and middle-class. This is well-documented. Rating scales help structure the nomination but don't eliminate the underlying referral bias.
+:::
+
+---
+
+## Giftedness: Equity and Underrepresentation
+
+::: callout-warn
+Gifted education has a **persistent, serious underrepresentation problem.** Students from low-income families, students of color, English learners, and students with disabilities are systematically underidentified.
+:::
+
+Mechanisms:
+
+- **Referral bias**: Teachers less likely to nominate students who don't match implicit giftedness prototype
+- **Test demands**: Verbally loaded tests favor students with rich early educational environments
+- **Opportunity gaps**: Prior access to enrichment, books, and academically stimulating experiences shapes test performance
+
+**Evidence-based remedies:**
+
+- **Universal screening**: Administer standardized measures to all students in a grade rather than relying on referrals. Research suggests universal screening increases identification of disadvantaged students by up to 174%.
+- **Local norms**: Evaluate students relative to their school or community peers when national norms don't reflect local demographics
+- **Nonverbal ability measures**: Reduce language demands (with caveats — no measure eliminates cultural influence)
+
+::: notes
+The 174% figure comes from research by Peters and colleagues (2019) and is a striking demonstration of referral bias. Universal screening essentially removes teacher gatekeeping as a bottleneck.
+:::
+
+---
+
+## Twice-Exceptional Students (2e)
+
+Students with high ability **and** a co-occurring disability (SLD, ADHD, ASD, etc.).
+
+:::: {.columns}
+
+::: {.column width="55%"}
+**The masking problem operates in both directions:**
+
+- High ability compensates for the disability → disability is missed
+- Disability suppresses test scores → giftedness is missed
+- Both are missed → student appears average; neither need is served
+
+**What to look for:**
+
+- Pronounced intraindividual variability ("spiky" profile)
+- Global score suppressed by specific deficits
+- History of high verbal output, creative ability, or deep domain knowledge alongside academic struggles
+:::
+
+::: {.column width="42%"}
+::: callout
+A flat cognitive profile is **not** what you expect in a 2e student. Elevated variance across subtests is the pattern; interpreting only the composite obscures it.
+
+Both sets of needs are real and require simultaneous attention in the intervention plan.
+:::
+:::
+
+::::
+
+::: notes
+2e identification is one of the most practically challenging assessment tasks because standard approaches are built around the assumption that high ability and disability don't co-occur at elevated rates — but they do. Students with ADHD and giftedness, or ASD and giftedness, are not rare.
+:::
+
+---
+
+# {.section-title}
+
+::: section-title-content
+**Section 4**
+
+**Cross-Cutting Principles**
+
+What applies across all three categories
+:::
+
+---
+
+## Multi-Method, Multi-Informant, Multi-Setting
+
+::: callout
+This is not a platitude. It is a **validity requirement** — each method controls for threats that other methods cannot.
+:::
+
+:::: {.columns}
+
+::: {.column width="48%"}
+**Why multiple methods?**
+
+Standardized scores have known error properties. Observations capture what scores miss. Records provide developmental and instructional history. Interviews yield hypothesis-generating context.
+
+No single method is sufficient for any of the three categories covered today.
+:::
+
+::: {.column width="48%"}
+**Why multiple informants?**
+
+Behavior is context-dependent. Parent and teacher reports are not redundant — they sample different environments. Discrepancies are information.
+
+**Why multiple settings?**
+
+A finding that holds across home, school, and structured assessment is more credible than one that appears in only one context.
+:::
+
+::::
+
+::: notes
+This is worth making explicit because students frequently default to "the tests" as the core of the evaluation and treat everything else as supplementary. The legal and ethical standard requires convergence across sources.
+:::
+
+---
+
+## Measurement Error Is Not a Footnote
+
+Every obtained score is an estimate. The standard error of measurement defines the **range of scores that would plausibly occur if you retested** with equivalent conditions.
+
+::: callout
+Confidence intervals are not optional fine print. They are necessary context for interpreting any score — especially at diagnostic thresholds where a few points determines eligibility.
+:::
+
+Practical implications:
+
+- IDD: A score of 73 may not rule out diagnosis; a score of 68 may not be sufficient to establish it
+- SLD: Achievement composites at the 16th vs. 25th percentile may not be reliably different
+- Giftedness: A score at the 97th percentile may reflect true performance anywhere from ~93rd to 99th+
+
+::: callout-warn
+The **bright line error** — treating a cutoff as absolute when the test's reliability does not support that precision — is one of the most common and consequential mistakes in applied assessment.
+:::
+
+::: notes
+This connects back to everything they've studied in the psychometrics unit. This is the practical payoff of understanding reliability and SEM. A lot of eligibility disputes come down to this exact issue.
+:::
+
+---
+
+## Context as an Interpretive Tool
+
+Language background, socioeconomic context, trauma history, educational opportunity, and cultural factors all bear on the **validity** of assessment data.
+
+These are not caveats. They are **interpretive tools to integrate throughout.**
+
+| Stage | What Context Shapes |
+|---|---|
+| Referral | Whether the concern reflects the child or the environment |
+| Measure selection | Which instruments have validity evidence for this population |
+| Administration | How rapport, language, and examiner factors affect performance |
+| Interpretation | What obtained scores mean given the child's experiences |
+| Recommendations | What supports are feasible and appropriate in this system |
+
+::: notes
+Frame this as a validity issue, not just a fairness/equity issue. Using normed scores to make high-stakes decisions about children whose experiences differ substantially from the norming sample is a measurement validity problem, not only an ethical one. Both framings are true and reinforce each other.
+:::
+
+---
+
+## Reports That Generate Hypotheses, Not Just Labels
+
+The report is the beginning of intervention planning, not its precondition.
+
+::: callout
+**Ask yourself before submitting any report:** If someone read only the Recommendations section, would they know specifically what to do, for whom, in what context, at what intensity, and how to evaluate whether it is working?
+:::
+
+Common report failures:
+
+- Recommendations that do not follow from the data
+- Data that do not address the referral question
+- Diagnosis-level conclusions without adequate evidence
+- Adequate evidence presented without actionable conclusions
+- Generic recommendations that apply to any child with that label
+
+Good reports are **individualized, specific, and tied to the assessment findings** — not generated from a template after the label is determined.
+
+::: notes
+This is a good slide to end with before the summary because it closes the loop on the intervention-orientation framing from the opening. The label should serve the plan, not replace it.
+:::
+
+---
+
+## Summary: Key Takeaways
+
+:::: {.columns}
+
+::: {.column width="48%"}
+**IDD**
+
+- Three-prong model: IQ + adaptive + developmental onset
+- Adaptive behavior is co-equal, not corroborating
+- SEM matters most at threshold; do not treat cutoffs as bright lines
+- Supports intensity > severity classification for planning
+- Comorbidities are common and undertreated
+
+**SLD**
+
+- SLD is an administrative umbrella; reading, math, and writing are distinct disorders
+- If you want to know about x, measure x
+- Low achievement + exclusionary ruling is the defensible clinic-based approach; PSW is not
+- Phonological awareness is the one well-validated processing exception
+- Procedural fluency is the priority in math intervention
+- Decompose written expression; composites obscure what you need to know
+:::
+
+::: {.column width="48%"}
+**Giftedness**
+
+- No federal mandate; criteria vary by state and district
+- Ceiling effects are a real psychometric threat
+- Multi-method identification is required
+- Underrepresentation is systemic; universal screening helps
+- 2e students are doubly at risk of misidentification
+
+**Cross-cutting**
+
+- Multi-method, multi-informant, multi-setting = validity requirement
+- Report confidence intervals; communicate measurement error
+- Context is an interpretive tool, not a disclaimer
+- Assessment serves intervention, not the other way around
+:::
+
+::::
+
+---
+
+## For Further Reading
+
+:::: {.columns}
+
+::: {.column width="48%"}
+**IDD**
+
+- AAIDD (2020). *Intellectual Disability: Definition, Classification, and Systems of Supports* (12th ed.)
+- Tassé et al. (2019). Defining intellectual disability. *Intellectual and Developmental Disabilities, 57*, 499–507.
+
+**SLD**
+
+- Fletcher, J. M., & Miciak, J. (2024). Assessment of SLD and ID. *Assessment for Effective Intervention.*
+- Stuebing, K. K., Fletcher, J. M., Branum-Martin, L., & Francis, D. J. (2012). Evaluation of the technical adequacy of three methods for identifying SLD based on cognitive discrepancies. *School Psychology Review, 41*, 3–22.
+- Schneider, W. J., & Kaufman, A. S. (2017). Let's not do away with comprehensive cognitive assessments just yet. *Archives of Clinical Neuropsychology, 32*, 8–20.
+- National Reading Panel (2000). *Teaching Children to Read.* NICHD.
+- VanDerHeyden, A. M., & Burns, M. K. (2010). *Essentials of Response to Intervention.* Wiley.
+- Poncy, B. C., Skinner, C. H., & Jaspers, K. E. (2007). Evaluating and comparing interventions designed to enhance math fact accuracy and fluency. *Journal of Behavioral Education, 16*, 91–110.
+- Graham, S., & Harris, K. R. (2018). Evidence-based writing practices. *British Journal of Educational Psychology Monographs.*
+:::
+
+::: {.column width="48%"}
+**Giftedness**
+
+- NAGC. *Assessments and Tests.* nagc.org/assessments-and-tests
+- Peters, S. J., Gentry, M., et al. (2019). Who gets served in gifted education? *Gifted Child Quarterly, 63*, 273–287.
+- Pfeiffer, S. I. (2015). *Essentials of Gifted Assessment.* Wiley.
+
+**Assessment practice**
+
+- Farmer, R. L. (2023). *Low value practices in the assessment of cognitive abilities.* University of Memphis.
+- NASP Practice Model (2020). Domain 2: Data-based decision making
+- APA Standards for Educational and Psychological Testing (2014)
+:::
+
+::::
+
+::: notes
+Encourage students to have the AAIDD-12 manual, not just the DSM criteria. For SLD, the Fletcher & Miciak 2024 piece is the most current synthesis of the three-method debate and is accessible.
+:::
+```

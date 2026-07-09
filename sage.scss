@@ -1,0 +1,212 @@
+/*-- scss:defaults --*/
+
+// ---- Palette --------------------------------------------------------
+// Sage green is the primary color, paired with a deep sage for
+// headings/emphasis, a warm ochre accent, and a warm-white background.
+$sage:        #7C9473 !default; // primary
+$sage-dark:   #3F5233 !default; // headings, table headers, dividers
+$sage-light:  #E9EFE4 !default; // subtle fills, rules, stripes
+$ink:         #262624 !default; // body text
+$paper:       #FBFAF7 !default; // background
+$accent:      #B08D57 !default; // ochre — links on hover, callouts
+
+$body-bg: $paper;
+$body-color: $ink;
+$link-color: $sage-dark;
+$link-color-hover: $accent;
+$selection-bg: $sage-light;
+$selection-color: $ink;
+
+// ---- Type -------------------------------------------------------------
+// Sans-serif throughout, smaller root size so dense slides don't run
+// off the bottom (see scss:rules for additional density controls).
+$mainFont: "Inter", -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+$presentation-heading-font: $mainFont;
+$code-font: "IBM Plex Mono", "Courier New", monospace;
+
+$presentation-font-size-root: 24px;
+$presentation-line-height: 1.35;
+
+$presentation-heading-color: $sage-dark;
+$presentation-heading-font-weight: 700;
+$presentation-heading-line-height: 1.15;
+$presentation-heading-letter-spacing: -0.01em;
+$presentation-heading-text-transform: none;
+$presentation-heading-text-shadow: none;
+
+$heading1-size: 1.9em;
+$heading2-size: 1.35em;
+$heading3-size: 1.05em;
+$heading4-size: 0.95em;
+
+/*-- scss:rules --*/
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;600&display=swap');
+
+.reveal {
+  font-size: 24px;
+
+  // Tighten default reveal.js spacing so more content fits per slide
+  h1, h2, h3, h4 { margin-bottom: 0.4em; }
+  p, ul, ol, table { margin-bottom: 0.5em; }
+  li { margin-bottom: 0.25em; }
+  ul, ol { padding-left: 0.9em; }
+
+  section {
+    text-align: left;
+  }
+
+  section.center,
+  section.title-slide {
+    text-align: center;
+  }
+}
+
+// ---- Title slide --------------------------------------------------
+.reveal .title-slide {
+  h1 {
+    color: $sage-dark;
+    font-size: 1.7em;
+  }
+  .subtitle {
+    color: $sage;
+    font-weight: 500;
+    margin-top: 0.2em;
+  }
+  .author, .date, .institute {
+    color: $ink;
+    opacity: 0.75;
+    font-size: 0.75em;
+    margin-top: 0.6em;
+  }
+}
+
+// ---- Block / section divider slides --------------------------------
+.reveal .block-divider {
+  background-color: $sage-dark;
+  color: $paper;
+
+  h1, h2 {
+    color: $paper;
+  }
+
+  .block-number {
+    display: block;
+    font-family: $code-font;
+    font-size: 3.2em;
+    font-weight: 600;
+    color: $sage-light;
+    opacity: 0.55;
+    line-height: 1;
+    margin-bottom: 0.15em;
+  }
+
+  .block-title {
+    font-size: 1.5em;
+    font-weight: 700;
+  }
+
+  .block-subtitle {
+    margin-top: 0.4em;
+    font-size: 0.85em;
+    color: $sage-light;
+    opacity: 0.9;
+  }
+}
+
+// ---- Tables ---------------------------------------------------------
+.reveal table {
+  font-size: 0.78em;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.reveal table thead tr th {
+  background-color: $sage-dark;
+  color: $paper;
+  font-weight: 600;
+  border-bottom: none;
+  padding: 0.4em 0.6em;
+}
+
+.reveal table tbody tr td {
+  border-bottom: 1px solid $sage-light;
+  padding: 0.4em 0.6em;
+}
+
+.reveal table tbody tr:nth-child(even) {
+  background-color: $sage-light;
+}
+
+// ---- Blockquotes (e.g. sample consent language, verbatim lines) ----
+.reveal blockquote {
+  border-left: 4px solid $accent;
+  background: transparent;
+  box-shadow: none;
+  font-style: italic;
+  padding-left: 0.7em;
+  margin: 0.6em 0;
+  font-size: 0.9em;
+}
+
+// ---- "Clinician in the Loop" recurring tag -------------------------
+.reveal .loop-tag {
+  position: absolute;
+  right: 2.2em;
+  bottom: 1.1em;
+  background-color: $sage;
+  color: $paper;
+  font-size: 0.5em;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  padding: 0.35em 0.7em;
+  border-radius: 2px;
+  opacity: 0.92;
+}
+
+// ---- Poll slides -----------------------------------------------------
+.reveal .poll-slide {
+  text-align: center;
+
+  .poll-link {
+    display: inline-block;
+    margin-top: 0.6em;
+    font-family: $code-font;
+    font-size: 1.3em;
+    color: $sage-dark;
+    background: $sage-light;
+    padding: 0.3em 0.8em;
+    border-radius: 3px;
+  }
+}
+
+// ---- Vignette prompt slides ------------------------------------------
+.reveal .vignette-slide {
+  .vignette-tag {
+    display: inline-block;
+    font-size: 0.6em;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: $sage-dark;
+    background: $sage-light;
+    padding: 0.15em 0.6em;
+    border-radius: 2px;
+    margin-bottom: 0.4em;
+  }
+}
+
+// ---- Small print / citations ------------------------------------------
+.reveal .cite {
+  font-size: 0.6em;
+  opacity: 0.7;
+  margin-top: 0.6em;
+}
+
+// ---- Speaker-note-only asides shown inline (rare) ---------------------
+.reveal .aside {
+  font-size: 0.75em;
+  color: $sage-dark;
+  opacity: 0.85;
+}

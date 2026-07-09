@@ -1,0 +1,550 @@
+---
+title: "Clinician in the Loop"
+subtitle: "Ethical AI Use in Mental Health Practice"
+author: "Ryan Farmer, PhD"
+institute: "NC Psychological Association & NC School Psychology Association"
+date: "2026-07-10"
+format:
+  revealjs:
+    theme: sage.scss
+    slide-number: true
+    transition: fade
+    incremental: false
+    embed-resources: true
+    height: 900
+    width: 1200
+---
+
+## What Do I Mean by "AI"? {.block-divider}
+
+::: {.block-number}
+Block 1
+:::
+
+::: {.block-title}
+Framing
+:::
+
+::: {.block-subtitle}
+What AI is, why adoption is outpacing guidance, and the ethical frame we'll use all day.
+:::
+
+## What Do I Mean by "AI"?
+
+**Generative AI Produces, It Doesn't Just Retrieve**
+
+- Produces fluent, human-like text tailored to a prompt
+- Summarizes, rephrases, and transforms information
+- Drafts, revises, and explains
+- Simulates dialogue
+- Helps structure reasoning, plans, or decisions
+
+::: {.notes}
+Distinguish this from tools people already trust without a second thought, like spellcheck, Grammarly, or a search engine. Those retrieve or correct. This produces something new. Level-set the room here since the audience mixes clinical, counseling, and school psychologists with very different starting familiarity with these tools.
+:::
+
+## AI Is Not Just Another Tool
+
+**Bounded & Deterministic vs. Unbounded & Stochastic**
+
+| Traditional Tools (calculators, spellcheck, scoring software, search engines) | Generative AI |
+|---|---|
+| Deterministic: same input, same output | Stochastic: same input can produce a different output each time |
+| Bounded: fixed output space, limited to what it's built to compute, check, or retrieve | Unbounded: effectively unlimited output space, anything expressible in language |
+| Errors are usually detectable (a miscalculation, a broken citation) | Errors can be fluent and confident, indistinguishable in style from a right answer |
+
+A calculator can't hallucinate a plausible-looking wrong answer dressed up as a right one. Generative AI can, and does, by design, every time you run it.
+
+::: {.notes}
+This is the real argument for why generative AI needs a different kind of scrutiny than any tool psychologists have used before. It's not that it's more powerful, calculators are also very good at what they do. It's that the failure mode is categorically different. A bounded, deterministic tool fails loudly. An unbounded, stochastic one can fail quietly, in a way that looks exactly like success. Flag verbally: this is also why the "AI in medicine" literature (bounded diagnostic classifiers, fixed-category image recognition) doesn't transfer directly to generative AI use. Some attendees may be mentally importing that framing, worth naming the distinction explicitly.
+:::
+
+## The Governance Gap
+
+**Adoption Is Outpacing Guidance**
+
+- 56% of psychologists used AI at work in the past year, up from 29% in 2024 (APA, 2025)
+- Only 20% say they trust AI, even though most who use it find it helpful (Lockwood, Farmer, & McClintock, 2025)
+- Fewer than 1 in 10 AI users have a HIPAA-compliant vendor agreement or BAA in place (Lockwood, Farmer, & McClintock, 2025)
+- 73% of practitioners report no formal AI policy at their workplace (Farmer, Lockwood, Floyd, & Sisco, 2025)
+
+::: {.notes}
+This is the throughline for the whole talk. Adoption is real and accelerating fast, but trust, compliance infrastructure, and workplace policy haven't caught up. Lockwood et al. call this the "trust-utility paradox": practitioners don't trust the tools, but use them anyway because they're useful. That gap between use and governance is exactly where ethical risk concentrates, and exactly what this talk is designed to help you navigate.
+:::
+
+## A Professional Reasoning Framework for AI Adoption
+
+**Five Principles, One Question: Does This Serve the Client?**
+
+- **Beneficence** — Does this AI use actually benefit the client, or just the practitioner's workload?
+- **Nonmaleficence** — What's the realistic risk of harm (inaccurate output, bias, deskilling)?
+- **Justice** — Does this tool work equally well across the populations you serve?
+- **Autonomy** — Does the client know, and have a say in, how AI is being used in their care?
+- **Confidentiality** — Where does their data go, and who else can access it?
+
+::: {.loop-tag}
+Clinician in the loop: this framework *is* the loop
+:::
+
+::: {.notes}
+This isn't a new ethics code, it's the existing one applied to a new technology. That's the explicit argument Farmer and Lockwood made in their 2024 paper when ChatGPT first started seeing use: the point is to apply the ethics we already have to something new, not to invent a new system. Every AI decision this talk covers (a documentation tool, a client's chatbot use, a consent form) can be run through these five questions. Framing it this way early tells the audience: you already have the ethical tools to reason about this, the goal today is applying them, not learning something entirely new.
+:::
+
+## Opening Poll {.poll-slide .center}
+
+**How often do you currently use AI tools in your professional work?**
+
+Never · Less than monthly · About monthly · Weekly · Daily
+
+::: {.poll-link}
+slido.com
+:::
+
+::: {.notes}
+Present the link/event code on screen, give the room about 60-90 seconds to join and vote on their own devices, then alt-tab to the Slido results view for a moment before returning to the deck. This does double duty: it's a low-effort way to get people participating early in a long virtual session, and it makes the governance-gap stat personal instead of abstract, "here's the room, here's the field," comparing the live distribution to the 56% used-at-least-once / 29% monthly / 8% daily figures from the Governance Gap slide.
+:::
+
+## Confidentiality & Data Privacy {.block-divider}
+
+::: {.block-number}
+Block 2
+:::
+
+::: {.block-title}
+Confidentiality & Data Privacy
+:::
+
+::: {.block-subtitle}
+Where data actually goes, what HIPAA and FERPA do (and don't) cover, and what a safer workflow looks like.
+:::
+
+## What Happens to Data in AI Tools
+
+**Once You Hit Enter, Where Does It Go?**
+
+- Free/consumer tools often retain the right to store input and use it to improve future models
+- No automatic HIPAA relationship with a vendor, only a signed BAA creates one
+- Largely a black box: limited visibility into internal storage and processing
+- Only 9% of AI-using health service psychologists report a HIPAA-compliant vendor; only 7% have an executed BAA (Lockwood, Farmer, & McClintock, 2025)
+- Yet 84% report never entering PHI into an AI tool (same study)
+
+::: {.notes}
+Draw the distinction explicitly: knowing not to type in a client's name is different from having actual contractual protections in place if something goes wrong. Most practitioners in the room already have the first instinct. Almost none have the second thing in place.
+
+Deliver verbatim: "I don't care how nice the vendor seems, how many 'HIPAA' or 'FERPA' labels they slap on their website. It doesn't matter without a BAA or equivalent."
+
+That's the real risk: careful behavior without compliance infrastructure behind it, and it's largely invisible until something goes wrong.
+:::
+
+## Consumer vs. Enterprise/Clinical-Grade Tools
+
+**Not All AI Tools Carry the Same Risk**
+
+|  | Consumer / Free Tier | Enterprise / Business Tier | Purpose-Built Clinical Tools |
+|---|---|---|---|
+| Example type | Free general-purpose chatbots | Paid business tiers of the same platforms | AI scribes built for behavioral health |
+| BAA available? | No | Sometimes, must be signed | Often built in, verify |
+| Used for model training? | Often, by default | Usually opted out by default | Typically no |
+| Designed for PHI? | No | Not by default | Often, but confirm scope |
+
+The category alone doesn't guarantee protection. A BAA has to be actually executed, and "designed for clinical use" doesn't automatically mean HIPAA-compliant. Verify directly with the vendor, in writing.
+
+::: {.notes}
+I deliberately avoided naming specific vendors here since BAA availability and compliance claims change fast, and I don't want the audience walking away thinking "Tool X is safe" based on a slide from July 2026. The framework (three tiers, four questions to ask) stays useful regardless of which specific products exist by the time they're back at their desk.
+:::
+
+## HIPAA and AI: What Actually Applies
+
+**HIPAA Doesn't Apply to the Tool. It Applies to You.**
+
+- Governs covered entities and their business associates
+- No automatic vendor compliance
+- Trigger: a signed Business Associate Agreement (BAA)
+- De-identification helps, but the mosaic effect still applies
+- Only 13.3% of AI-using psychologists report ever entering PHI; just 7.1% have a BAA (Lockwood, Farmer, & McClintock, 2025)
+
+::: {.notes}
+The trigger is a signed BAA: without one, PHI shouldn't go in, full stop. Using an AI tool doesn't automatically make it HIPAA-compliant, and it doesn't automatically make you non-compliant either, compliance is determined by the agreement in place, not the tool's marketing. De-identification can lower risk, but as covered in the vignette work, indirect identifiers (the mosaic effect) can still make de-identified data re-identifiable, especially in small populations. Good moment to return to the room: connect back to the opening poll, if a chunk of the room said they use AI weekly or daily, pose rhetorically: "how many of you know, for certain, whether you have a BAA with that vendor?" No need for an actual show of hands, the rhetorical framing lands the same point.
+:::
+
+## FERPA and AI: What Actually Applies
+
+**FERPA Governs the Record, Not the Tool**
+
+- Covers "education records," broader than grades (evaluations, IEP data, behavioral records)
+- No automatic vendor compliance; trigger is a "school official" agreement
+- Consumer-grade tools almost never meet this bar
+- "FERPA certified" isn't a real federal standard
+- 90%+ of school psychologists avoid identifiable data, but district policies remain rare (Farmer, Lockwood, Floyd, & Sisco, 2025)
+
+::: {.notes}
+Like HIPAA, FERPA doesn't automatically apply to an AI vendor; the trigger is whether the vendor qualifies as a "school official" with legitimate educational interest under a written agreement. Pasting identifiable student data into a free chatbot is a FERPA problem, not a gray area. School-based practitioners face a sharper version of the mosaic effect: small population size (one grade, one school) makes indirect identifiers riskier than the same details would be in a large hospital system.
+
+On the certification point: there is no federal FERPA certification, the Department of Education doesn't certify products. A few private companies sell their own "FERPA Certified" seals, but these are marketing badges, not legal compliance, and they don't substitute for the actual legal trigger. FERPA itself doesn't specify minimum technical requirements for data handling the way a security standard would; it's a legal framework about who may access records and under what agreement, not a checklist a vendor can satisfy with a badge. Deliver this as a direct warning: if a vendor's marketing leads with "FERPA certified," that's worth a follow-up question, not automatic reassurance.
+
+Acknowledge the room split here: clinical/counseling folks are thinking HIPAA, school psychologists are thinking FERPA, and both need to hear the underlying logic is identical: no automatic compliance, agreement-based trigger, and the tool's marketing language is irrelevant without paperwork behind it.
+:::
+
+## A Safe vs. Risky Workflow Example
+
+**A Safe vs. Risky Workflow**
+
+|  | Risky | Safer |
+|---|---|---|
+| Tool | Free consumer chatbot | Enterprise tier or clinical-grade tool |
+| Data in | Full name, DOB, school, raw scores | No direct identifiers; indirect details minimized |
+| Agreement | None | Signed BAA / vendor agreement |
+| Output use | Pasted straight into report | Reviewed, verified, edited before use |
+
+::: {.notes}
+Walk this as a before/after using the Vignette 1 scenario the audience will see later in breakout: a school psychologist pasting a full evaluation into a free chatbot. Point at each row left to right: wrong tool, wrong data, no agreement, no review. Then rebuild it column by column into the "safer" version, same time savings, none of the exposure. The point isn't "don't use AI," it's "here's what responsible use actually looks like, concretely, not just in principle." Natural moment to foreshadow the breakout vignettes without giving away the discussion questions.
+:::
+
+## Accuracy, Bias & Informed Consent {.block-divider}
+
+::: {.block-number}
+Block 3
+:::
+
+::: {.block-title}
+Accuracy, Bias & Informed Consent
+:::
+
+::: {.block-subtitle}
+Where AI gets clinical content wrong, how bias enters, and what real informed consent requires.
+:::
+
+## Where AI Gets Clinical Content Wrong
+
+**Accuracy: Fluency Isn't Accuracy**
+
+- Hallucinations: confident, fluent, and wrong
+- Human-written reports still rated higher quality overall
+- AI-generated recommendations rated as good or better
+- Test interpretation is where skepticism is highest, and for good reason
+
+::: {.loop-tag}
+Clinician in the loop: fluency isn't a substitute for verification
+:::
+
+::: {.notes}
+Cite the comparison study (Lockwood, Farmer, Shergill, Benson, & Gilbert, under review): when masked, human-written reports were rated higher on overall quality, writing, organization, and summary quality; AI-generated content was rated higher on recommendations and sentence length; both were roughly equal on readability and jargon. National data shows practitioners' instincts largely track this: 46.6% of school psychologists (Farmer et al., 2025) and 52.3% of health service psychologists (Lockwood, Farmer, & McClintock, 2025) disagreed that AI-generated reports matched their own quality. Test interpretation was the single most controversial application in both samples, over half disagreed it was ethical. Takeaway: practitioners are already, largely correctly, more trusting of AI for recommendations than for synthesis or interpretation. That's a good instinct to reinforce, not override.
+:::
+
+## Bias in AI-Assisted Decision-Making
+
+**Bias: Trained on the Past, Applied to the Present**
+
+- AI reflects the biases in its training data
+- Documented bias domains: gender, race, disability, nationality, religion
+- Automation bias: over-trusting confident output
+- 45% of diagnostic errors under AI assistance were tied to automation bias (Wang et al., 2023)
+
+::: {.notes}
+Specific citations if asked: gender bias (Basta et al., 2019; Kotek et al., 2023), disability bias (Narayana Venkit et al., 2022), nationality bias (Narayana Venkit et al., 2023), religious bias (Abid et al., 2021), racial bias (Kiritchenko & Mohammad, 2018). Automation bias is a human factors concept (Hoff, 2011): reduced discretion, autonomy, and decision-making quality when people over-rely on automated output. Land the point that ambiguous, borderline cases (exactly the kind clinicians most need help with) are exactly where automation bias is riskiest, not safest, since there's no obvious wrong answer to catch. Direct setup for Vignette 2 (The Confident Interpretation) later in breakout, don't give away the vignette itself, just plant the seed.
+:::
+
+## Informed Consent: What's Missing from Generic Language
+
+**"Use of Technology" Isn't Informed Consent**
+
+- 73% believe AI use should be disclosed; actual disclosure is rare
+- Median disclosure rate: 10%. Mode: 0%
+- Generic "technology" language in intake forms doesn't meet the bar
+- Specific consent should name the tool, the data, and the opt-out
+
+::: {.notes}
+Core stat from Lockwood, Farmer, & McClintock (2025): 73.0% believed practitioners should routinely disclose AI use, another 19.1% endorsed conditional disclosure, yet actual reported disclosure averaged 40.67%, median 10%, and the single most common answer was 0%. School psychology data shows an even starker gap: Farmer et al. (2025) found an average disclosure rate of just 14.2%, also with a median of 0%. This is the attitude-behavior gap in a single number, remarkably consistent across two very different professional samples. Tie this directly back to Vignette 3 (The Retroactive Disclosure): a generic "we may use technology to support treatment" clause is exactly the kind of language that creates this gap. It technically exists, but it doesn't do the job informed consent is supposed to do: letting the client make a genuinely informed choice.
+:::
+
+## Sample Consent Language
+
+**What Specific Consent Actually Names**
+
+- The tool or type of tool
+- What data it processes and where it's stored
+- Purpose (documentation, transcription, etc.)
+- A real opt-out, not a token one
+- When re-disclosure is needed (e.g., new vendor)
+
+> "Our practice may use AI-assisted tools (for example, for note transcription or drafting) as part of your care. These tools do not have access to your name or other identifying information unless specifically stated. You may decline the use of these tools for your care at any time, without affecting the services you receive. If our practice changes which AI tools we use in a way that affects your data, we will notify you before that change takes effect."
+
+::: {.notes}
+Read the sample clause aloud rather than making people copy it off the slide; full legal-style text works better as a takeaway handout than crammed into bullets. Point out the last sentence specifically, since it's the piece most consent forms are missing entirely: an obligation to notify on vendor change, not just a one-time disclosure at intake. Consider offering this as a downloadable handout alongside the slides.
+:::
+
+## Transition Poll {.poll-slide .center}
+
+**Has a client ever mentioned using AI on their own?**
+
+Yes, in coping/self-support · Yes, replacing/skipping sessions · Yes, for other decision-making · Not sure / not that I know of
+
+::: {.poll-link}
+slido.com
+:::
+
+::: {.notes}
+Same mechanic as the opening poll: link/QR to Slido, brief pause while people vote, alt-tab to results. This one earns its keep structurally: it closes out "AI in the practitioner's hands" (confidentiality, accuracy, consent) and opens "AI in the client's hands" (Block 4) with the room's own data instead of a cold topic switch. Whatever the live results show, the next slide (prevalence data) lets you say "here's the room, here's the field" again, bookending the two poll moments. If "skipping sessions" gets any real percentage, that's a good live hook into the Vignette 4 variant later.
+:::
+
+## Therapy with AI-Using Clients {.block-divider}
+
+::: {.block-number}
+Block 4
+:::
+
+::: {.block-title}
+Therapy with AI-Using Clients
+:::
+
+::: {.block-subtitle}
+What clients are actually doing with AI, the research on dependence and sycophancy, and how to respond well.
+:::
+
+## Prevalence Data
+
+**How Common Is This, Really?**
+
+- 77% of psychologists report patients have discussed AI use with them (APA, 2026)
+- 39% report patients using AI to self-diagnose
+- 35% report patients using AI as an "additional" mental health professional
+- 13% report a patient forming an intimate/relationship-like bond with a chatbot
+- Only 1 in 4 psychologists think patients will eventually prefer chatbots to human clinicians
+
+::: {.notes}
+This is from APA's 2026 Chatbots and Mental Health Survey, over 1,200 licensed psychologists, released just weeks before this talk. Correct the framing explicitly if an earlier draft used a smaller number: 77% is the topline; 34% (next slide) is one specific use category within that, not the whole picture. The "1 in 4" stat is worth landing deliberately, it pushes back on the more alarmist "AI replacing therapists" narrative while still taking the rest of the data seriously.
+:::
+
+## What Clients Are Actually Using AI For
+
+**Not Just One Thing**
+
+- Self-discipline, affirmations, reminders: 34%
+- Assisting with treatment: 33%
+- Acting as an "additional" mental health provider: 35%
+- Self-diagnosis: 39%
+- Qualitative themes: managing anxiety/depression symptoms, relationship conflict, general well-being (Luo, 2025)
+
+::: {.notes}
+These categories aren't mutually exclusive; a single client might land in several. Benjamin Caldwell (quoted in APA's coverage) frames chatbots as safest for narrow, clearly bounded tasks: psychoeducation, practicing CBT exercises, mood tracking between sessions, a useful line to distinguish "safer" from "risky" use going into the next slide. Alexandre Vaz's quote is a strong one to use verbatim if you want a hook: general-purpose chatbots may now be "the world's largest source of emotional support," even though they were never built for it. Also worth surfacing: 93% of psychologists have concerns about certain patients' chatbot use, 97% worry about reinforcing negative beliefs or delusional thinking, 94% say today's chatbots can't handle clinical nuance. That's the bridge into the sycophancy/dependence research slide next.
+:::
+
+## Sycophancy, Dependence, Feedback Loops
+
+**Why "It Feels Helpful" Isn't the Same as "It Works"**
+
+- Chatbots are built to agree with you and keep you engaged
+- They sound confident even when wrong
+- They can feel like they "know" you. They don't
+- Guided self-help beats self-guided; where AI-only fits is still unknown
+- Even effective treatments only help 30–42% of patients (baseline reality check)
+
+::: {.notes}
+This slide leans on Pim Cuijpers (professor emeritus of clinical psychology, VU Amsterdam, scientific director of Metapsy), writing in a 2026 patient-facing piece for Metapsy. His framing separates two kinds of claims: what the evidence actually supports, and what's just sensible practical guidance. Evidence side: guided self-help outperforms self-guided self-help, and guided self-help can match face-to-face therapy for some conditions, but we do not yet know where unsupervised AI-only use falls on that spectrum. That's a genuine open question, not something to overstate in either direction.
+
+Practical side: Cuijpers points people to APA's patient-facing guide, which flags behavioral tendencies of chatbots (agreement, engagement-optimization, confident-regardless-of-accuracy tone, a false sense of being "known"). These aren't peer-reviewed findings about clinical outcomes, they're low-risk, common-sense observations worth passing along to clients even though they haven't been formally validated the way the underlying self-help literature has. Worth naming that distinction out loud: "some of what I'm telling you is evidence, some of it is just good sense, and I want to be clear about which is which." Close with Cuijpers' bottom line: the goal isn't to shut client AI use down, it's to make sure clients are being open about it with their actual clinician.
+:::
+
+## Clinical Response Strategies
+
+**What To Actually Do With This**
+
+- Ask directly, don't wait for disclosure
+- Distinguish supplement from substitution
+- Frame follow-up with curiosity, not correction
+- Reassess treatment plan if use is displacing care
+- Document the conversation, not just the behavior
+
+::: {.notes}
+1. Ask directly: disclosure rates are low across the board, don't wait for a client to bring it up. A normalized intake/check-in question works better than an assumption either way: "Have you used AI tools like ChatGPT for any kind of emotional support or advice?"
+2. Distinguish supplement from substitution: the line from Vignette 4 and its variant. Using a chatbot to journal between sessions is a different clinical picture than using it to skip sessions outright. The question isn't "are they using AI," it's "what is the AI use replacing."
+3. Curiosity over correction: Cuijpers' framing again, the goal is understanding what the AI use provides and whether that need is being met elsewhere. "What does talking to it give you that feels harder to get elsewhere?" opens the conversation; "you shouldn't be doing that" closes it.
+4. Reassess the treatment plan when warranted: if use has shifted from supplement to substitution, that's a legitimate treatment planning item, not just a conversational aside.
+5. Document thoughtfully: note the conversation and clinical reasoning, not just "client reports using AI," which without context reads as an isolated fact rather than a clinical judgment call.
+
+Natural moment to preview the breakout: "You're about to get a chance to practice exactly this in Vignette 4."
+:::
+
+## Transition to Breakout
+
+**Breakout: 30 Minutes, Four Scenarios**
+
+- Everything so far becomes practice
+- Small groups, one vignette each
+- Discussion questions guide you; there's no "right answer" to find
+- Facilitator guide and vignette text are in your handout
+
+::: {.notes}
+Short transition, mostly logistics. Confirm before the talk whether the virtual platform's breakout rooms are pre-assigned or self-select, and whether vignettes are randomly distributed or chosen by groups. Given room size (70+), pre-assigned rooms with vignettes distributed evenly is more reliable than self-select, less chance of everyone piling into "the AI companion" scenario because it sounds the most interesting. Mention explicitly that full vignette text and discussion questions are in the shared handout, not on the slide.
+:::
+
+## Breakout Instructions
+
+**How This Works**
+
+- Groups of 4–6, one vignette per group
+- ~6–7 minutes per vignette
+- Pick a note-taker
+- Report back 1–2 takeaways when we return
+
+::: {.notes}
+Same instruction block as the top of the facilitator guide, surfaced on-screen so people don't have to dig through the handout to find it. State the return time explicitly ("we'll come back together at [X:XX]") so groups can self-pace. If the platform supports a broadcast message or countdown timer in breakout rooms, use it here instead of relying on verbal instruction alone.
+:::
+
+## Vignette 1: The Free Assistant {.vignette-slide}
+
+::: {.vignette-tag}
+Confidentiality & Data Privacy
+:::
+
+- A school psychologist pastes identifiable student data into a free chatbot
+- Variant: same scenario, indirect identifiers only
+- Discuss: what's the actual risk, and how does it change?
+
+::: {.notes}
+Signpost only, full scenario and discussion questions live in the handout. Read the one-line scenario aloud when introducing breakout groups so people know which one they're headed into.
+:::
+
+## Vignette 2: The Confident Interpretation {.vignette-slide}
+
+::: {.vignette-tag}
+Accuracy & Bias
+:::
+
+- An ambiguous case, a confident AI interpretation, a tempting shortcut
+- Discuss: fluency vs. accuracy, and what verification actually requires
+
+::: {.notes}
+Signpost only, full scenario in the handout.
+:::
+
+## Vignette 3: The Retroactive Disclosure {.vignette-slide}
+
+::: {.vignette-tag}
+Informed Consent
+:::
+
+- A client discovers AI use the counselor assumed was already covered
+- Discuss: what real consent requires, and how to repair the gap
+
+::: {.notes}
+Signpost only, full scenario in the handout.
+:::
+
+## Vignette 4: The AI Companion {.vignette-slide}
+
+::: {.vignette-tag}
+Therapy with AI-Using Clients
+:::
+
+- A client relies on a chatbot nightly, sometimes instead of sessions
+- Discuss: where's the line, and how do you raise it well?
+
+::: {.notes}
+Signpost only, full scenario in the handout. This one includes the "skipping sessions" variant as a parallel concern, in the handout, not on this slide.
+:::
+
+## Documentation & Practice Policy {.block-divider}
+
+::: {.block-number}
+Block 5
+:::
+
+::: {.block-title}
+Documentation & Practice Policy
+:::
+
+::: {.block-subtitle}
+Where AI actually helps with paperwork, where to stop and verify, and how to build this into policy.
+:::
+
+## AI-Assisted Documentation Workflows
+
+**Where AI Actually Helps With Paperwork**
+
+- Most common use across every study cited today: writing assistance
+- Works best on smaller chunks, not whole reports at once
+- Recommendations and phrasing help; synthesis and interpretation don't
+- Always edited after the fact, never used as final text
+- De-identify or template before input, not after
+
+::: {.loop-tag}
+Clinician in the loop: edited after the fact, every time
+:::
+
+::: {.notes}
+This slide is deliberately practical after three blocks of risk framing, people need a "here's what to actually do" moment. Pull from the APTC findings: AI performs better with smaller chunks than whole-document generation, human-written summaries remain higher quality, AI-generated recommendations were rated as good or better than practitioner-written ones. Workable rule of thumb: use AI for templated, phrasing-dependent parts (a recommendation, an explanatory paragraph for parents, an email), keep judgment-heavy parts (interpretation, synthesis, diagnostic reasoning) fully human, verified after the fact either way. Callback to Vignette 1 and the mosaic effect: a good workflow builds de-identification into the process (a template with placeholders, a separate scrubbing step) rather than relying on the practitioner to remember under time pressure.
+:::
+
+## Verification Checkpoints
+
+**Where to Stop and Check, Every Time**
+
+- Before it enters the client record
+- Before a diagnosis or recommendation is finalized
+- Before anything goes to a third party (school, court, insurer)
+- When output feels unusually fast or unusually confident
+
+::: {.loop-tag}
+Clinician in the loop: the checkpoints, made concrete
+:::
+
+::: {.notes}
+Frame this as a small number of hard stops rather than "review everything constantly," since an unrealistic standard gets ignored under caseload pressure. The last bullet is worth emphasizing: the moment AI output feels most trustworthy (fast, fluent, decisive) is exactly the moment automation bias is most likely operating, tie back to Vignette 2 and the "fluency isn't accuracy" framing from Block 3. Practical framing for the room: treat unusually confident AI output the way you'd treat a colleague who's never wrong, a little useful skepticism, not blind trust. If speaking to anyone who supervises trainees, this is a natural spot to mention requiring independent judgment before AI consultation, even just a one-line aside.
+:::
+
+## Building a Practice-Level AI Policy
+
+**Clinician in the Loop, By Policy Not Just Habit**
+
+- Individual discipline isn't a substitute for a written policy
+- Name approved tools and vendors explicitly
+- Require human review before anything reaches a record or client
+- State disclosure expectations, don't leave them implicit
+- Assign someone to own policy updates as tools change
+
+::: {.notes}
+This is the pivot from individual practice to organizational structure. Everything earlier in the talk (verification, consent, de-identification) works only as well as an individual practitioner's discipline on any given day, exactly the gap the national data keeps showing: 73% of school psychologists have no workplace policy (Farmer et al., 2025), and formal policies are similarly rare among health service psychologists. A written policy is what keeps "clinician in the loop" from depending on willpower alone. Frame the policy itself as the mechanism that keeps a human decision-maker structurally required at each step, not a document that sits in a drawer.
+:::
+
+## Policy Checklist
+
+**Clinician in the Loop: A Working Checklist**
+
+- Approved tools named, with BAA status noted
+- Prohibited uses stated explicitly (e.g., no PHI in consumer tools)
+- Human review required before record, before client, before third party
+- Disclosure language standardized, not left to individual discretion
+- Training required before use, not optional
+- Review cycle set (e.g., annually, or on vendor change)
+
+::: {.notes}
+Designed as a literal takeaway: practitioners or clinic directors should be able to screenshot or copy this slide and start drafting against it Monday morning. Each line maps back to something earlier in the talk: approved tools/BAA status (Block 2), human review checkpoints (Verification Checkpoints), disclosure standardization (the consent block), training (the adoption data showing most practitioners have had none). Say explicitly: "this isn't a policy, it's the skeleton of one, six things any policy needs to name."
+:::
+
+## Closing / Resources
+
+**Clinician in the Loop**
+
+- Adoption is outpacing guidance, that's not going to reverse
+- The five principles you started with still apply. Use them here
+- Being in the loop is a practice, and a policy, not just an instinct
+- Resources: APA Ethical Guidance for AI (2025), APA Health Advisory on Chatbots (2025), APA Guide to Navigating AI-Generated Advice, NASP AI Task Force materials
+
+::: {.notes}
+This closes the loop deliberately back to the framing slide from the very start of the talk: the five-principle framework and the "apply the ethics we have" argument from the 2024 Farmer & Lockwood paper. Land explicitly: nothing in this talk asked the audience to learn a new ethical system, it asked them to apply the one they already have, deliberately, to something new. That's the whole argument, said once at the start and once at the end. Point to the handout for a full reference list rather than trying to list every paper cited today on this slide.
+:::
+
+## Questions? {.center}
+
+Ryan Farmer, PhD
+
+rlfarmer@memphis.edu
+
+The University of Memphis
+
+*Slides: [link added once hosted]*
+
+::: {.notes}
+Since this is virtual, decide in advance how to handle live Q&A: verbally, via chat, or routed through Slido's Q&A feature (already set up for polling, so it's a natural reuse rather than a new tool). If time is genuinely tight, this is also a reasonable slide to trim live-Q&A time on and instead point people to email.
+:::
